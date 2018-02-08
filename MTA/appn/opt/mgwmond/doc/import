@@ -1,0 +1,3 @@
+INSERT INTO alert (id, name, target, trigger, text, text2, note, status, type) VALUES ('1', 'MTA ALERT mta060_qintmass-ipfromlock', 'mta060_qintmass-ipfromlock', '4000', 'MTA ALERT: Too many messages queued in mta060_qintmass-ipfromlock', 'NOTICE: We are intervening in mta060 by incident in queue mta060_qintmass-ipfromlock', '', 'DEACTIVATED', 1);
+INSERT INTO alert (id, name, target, trigger, text, text2, note, status, type) VALUES ('2', 'MTA ALERT mta060_qintmass-iplock', 'mta060_qintmass-iplock', '4000', 'MTA ALERT: Too many messages queued in mta060_qintmass-iplock', 'NOTICE: We are intervening in mta060 by incident in queue mta060_qintmass-iplock ', '', 'DEACTIVATED', 1);
+

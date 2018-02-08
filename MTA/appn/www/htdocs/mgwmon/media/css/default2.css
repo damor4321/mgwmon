@@ -1,0 +1,254 @@
+/*
+Web dise�ada y programada por Emenia
+www.emenia.es
+jbustamante@emenia.es
+*/
+
+/* 
+	R E S E T (Por Eric Meyer)
+*/
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, font, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+/*	table, caption, tbody, tfoot, thead, tr, th, td {margin:0; padding:0; border:1; outline:0; font-size:100%; vertical-align:top; background:transparent;}*/
+	body 											{line-height: 1;}
+	ol, ul 											{list-style: none;}
+	blockquote, q 										{quotes: none;}
+	:focus 											{outline: 0;}
+	ins 											{text-decoration: none;}
+	del 											{text-decoration: line-through;}
+	/*table 											{border-collapse: collapse;border-spacing: 0; }*/
+	a img 											{border:none }
+
+
+
+
+
+th {
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #4f6b72;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 0px 10px 0px 0px;
+	/*background: #CAE8EA;*/
+	background: #a0c1ea;
+}
+
+th.nobg {
+	border-top: 0;
+	border-left: 0;
+	border-right: 1px solid #C1DAD7;
+	background: none;
+}
+
+td {
+	text-align: center;
+	border-right: 1px solid #ffffff;
+	background: #fff;
+	padding: 0px 10px 0px 0px;
+	color: #4f6b72;
+	font-size: 12px;
+}
+
+
+/*
+td.alt {
+	background: #F5FAFA;
+	color: #797268;
+}
+*/
+
+td.alt {
+	background: #DDDDDD;
+	color: #797268;
+}
+
+td.f {
+	text-align: center;
+	border:0px;
+	background: #ffffff;
+	color: #797268;
+	padding: 0px 0px 50px 0px;
+}
+
+td.g {
+	text-align: left;
+	border:0px;
+	background: #ffffff;
+	color: #ffffff;
+	padding: 0px 0px 50px 20px;
+}
+
+td.hh {
+	text-align: center;
+	border:0px;
+	background: #ffffff;
+	color: #000000;
+	padding: 0px 0px 20px 0px;
+}
+
+
+td.h {
+	text-align: left;
+	border:0px;
+	background: #ffffff;
+	color: #000000;
+	padding: 0px 0px 20px 20px;
+}
+
+td.ii {
+	text-align: left;
+	border:0px;
+	width: 150px;
+	background: #ffffff;
+	color: #000000;
+	padding: 0px 0px 0px 0px;
+}
+
+td.iii {
+	text-align: left;
+	border:0px;
+	width: 350px;
+	background: #ffffff;
+	color: #000000;
+	padding: 0px 0px 0px 0px;
+}
+
+
+td.fv {
+	text-align: left;
+	border-right: 1px solid #ffffff;
+	background: #fff;
+	padding: 10px 10px 0px 20px;
+	color: #4f6b72;
+	font-size: 12px;
+}
+
+
+
+/* 
+	C L A S E S   P R E S E N T A C I O N A L E S
+*/
+	.aligncenter 			{	display:block; margin:0 auto }
+	.alignleft 				{	float:left }
+	.alignright 			{	float:right }
+	br.clear 				{	clear:both; display:block; height:1px; margin:-1px 0 0 0 } 
+/*
+	E S T I L O S    G E N E R A L E S
+*/
+	html, body 				{margin:0; padding:0; text-align:center; width: 100%;}
+	body					{color: #333; font-family: "Trebuchet MS", Tahoma, Arial, sans-serif; font-size: 12px; line-height: 1.7em; text-align: center;}
+	h1, h2, h3, h5, h5, h6 			{font-weight:bold; font-family: Arial, serif; }
+	a:link, a:visited			{color: #000; text-decoration: underline;}
+	a:hover					{color: #f4A774;}
+	a:active				{color: #000; text-decoration: underline; }
+/*
+	C O N T E N I D O
+*/
+	#contenido		{width: 2000px; margin: 0px auto 0;}
+	#contenido h2		{font-size: 4em; margin-bottom: 50px;}
+	#contenido		{width: 2000px; margin: 0px auto 0;}
+	#contenido h2		{font-size: 4em; margin-bottom: 50px;}
+	dl			{width: 2000px; margin: 8px auto 0; text-align: center; font-size: 12px;}
+	dl dt			{color: #a7b40a; font-size:12px; padding:0px 20px 0px 0px; cursor:pointer;}
+	dd			{font-size: 12px;}
+	
+a.dp-choose-date {
+	float: left;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 0px 0px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url(calendar.png) no-repeat; 
+}
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}
+/* makes the input field shorter once the date picker code
+ * has run (to allow space for the calendar icon
+ */
+input.dp-applied {
+	width: 140px;
+	float: left;
+}
+
+
+fieldset {
+	border: 0;
+}
+
+label {
+	display: block;
+	float: left;
+	width: 200px;
+	clear: left;
+	text-align: left;
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
+
+select.norm {
+	height: 25px;
+}
+
+
+#selusers {
+	display: block;
+	float: left;
+	width: 400px;
+	margin-bottom: 10px;
+	margin-left: 13px;
+	
+}
+
+#selusers * {
+	display: block;
+	float: left;
+	width: 40%;
+}
+
+select {
+	height: 100px;
+}
+
+#selusers fieldset {
+	width: 5%;
+	height: 100px;
+	padding: 10px;
+	padding-top: 25px;
+}
+
+#selusers fieldset input {
+	width: 100%;
+	margin: 5px 0;
+}
+
+option {
+	width: 100% !important;
+	border: 0;
+	border-bottom: 1px dotted #959DB7;
+}
+
+#kohana_error { background: #ddd; font-size: 1em; font-family:sans-serif; text-align: center; color: #111; }
+#kohana_error h1, #kohana_error h2 {
+	margin: 0;
+	padding: 1em;
+	font-size: 1em;
+	font-weight: normal;
+	background: #911;
+	color: white;
+}
+
+

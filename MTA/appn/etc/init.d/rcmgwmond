@@ -1,0 +1,164 @@
+#!/bin/sh
+APP_PATH="/MTA/appn/opt/mgwmond"
+
+TASK0="$APP_PATH/tasks/transfer.sh"
+TASK1="$APP_PATH/tasks/write_mondata.sh"
+
+SERVICE="mgwmond"
+#APP="$APP_PATH/mgwmond.pl"
+APP="./mgwmond.pl"
+
+red='\E[31;40m'
+green='\E[32;40m'
+yellow='\E[33;40m'
+
+function Usage() {
+	echo "Usage:"
+	echo -e "\t$0 [ status | start0 | startapp | start | stop0 | stopapp | stop]"
+}
+
+
+function PreStart() {
+
+#	RunTask $TASK0
+#	ERRCOD=$?
+#	if [ "$ERRCOD" != "0" ]
+#	then
+#		return $ERRCOD
+#	fi
+		
+	RunTask $TASK1
+	ERRCOD=$?
+	if [ "$ERRCOD" != "0" ]
+	then
+		return $ERRCOD
+	fi
+}
+
+
+function RunTask() {
+        echo -n "Running "`basename $1`" ..."
+        $1 2>&1>/dev/null &
+        ERRCOD=$?
+        if [ "$ERRCOD" != "0" ]; then
+                echo -e "$red	[ERROR]"
+                tput sgr0
+                ERROR=1
+        else
+                echo -e "$green	[Ok]"
+                tput sgr0
+        fi
+        return $ERROR
+}
+
+
+
+function Start() {
+	echo -n "Running $SERVICE ..."
+	(cd $APP_PATH ;$APP 2>&1>/dev/null &)
+	ERRCOD=$?
+	if [ "$ERRCOD" != "0" ]; then
+		echo -e "$red	[ERROR]"
+		tput sgr0
+		ERROR=1
+	else
+		echo -e "$green	[Ok]"
+		tput sgr0
+	fi
+	return $ERROR
+}
+
+function Stop() {
+	PIDS=`ps ax | grep -v grep | grep $APP | awk 'BEGIN {FS=" "} {print(\$1)}'`
+	for PID in $PIDS
+	do
+		echo -n "Killing $SERVICE ... (PID $PID)"
+		kill $PID
+		ERRCOD=$?
+		if [ "$ERRCOD" != "0" ]; then
+			echo -e "$red	[ERROR]"
+			tput sgr0
+		else
+			echo -e "$green	[Ok]"
+			tput sgr0
+		fi	
+	done
+	
+}
+
+function TaskStop() {
+        PIDS=`ps ax | grep -v grep | grep $1 | awk 'BEGIN {FS=" "} {print(\$1)}'`
+        for PID in $PIDS
+        do
+                echo -n "Killing "`basename $1`" ... (PID $PID)"
+                kill $PID
+                ERRCOD=$?
+                if [ "$ERRCOD" != "0" ]; then
+                        echo -e "$red	[ERROR]"
+                        tput sgr0
+                else
+                        echo -e "$green	[Ok]"
+                        tput sgr0
+                fi
+        done
+}
+
+
+function Status() {
+
+	#for PROG in $TASK0 $TASK1 $APP
+	for PROG in $TASK1 $APP
+	do
+        	PIDS=`ps ax | grep -v grep | grep $PROG | awk 'BEGIN {FS=" "} {print(\$1)}'`
+                if [ "$PIDS" = "" ]; then
+                        echo -e "$red* `basename $PROG` IS STOPPED"
+                        tput sgr0
+                else
+			PIDS=`echo $PIDS | sed 's/\n/,/g'`
+                        echo -e "$green* `basename $PROG` IS STARTED	[PIDS: $PIDS]"
+                        tput sgr0
+                fi
+        done
+}
+
+
+function PostStop() {
+
+        #TaskStop $TASK0
+        TaskStop $TASK1
+}
+
+
+
+case "$1" in
+	status)
+		Status
+		;;
+	start0)
+		PreStart
+		exit $?
+		;;	
+	stop0)
+		PostStop
+		exit $?
+		;;	
+	startapp)
+		Start
+		exit $?
+		;;
+	stopapp)
+		Stop
+		exit $?
+		;;
+	start)
+		PreStart
+		Start
+		;;
+	stop)
+		Stop
+		PostStop
+		;;	
+	*)
+		Usage
+		;;
+esac
